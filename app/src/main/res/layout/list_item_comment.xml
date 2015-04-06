@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp">
+
+    <ImageView
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:id="@+id/image_profile"
+        android:paddingLeft="4dp"
+        android:paddingRight="6dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/secondary_text"
+        android:layout_toRightOf="@id/image_profile"
+        android:textStyle="bold"
+        android:paddingBottom="1dp"
+        android:paddingLeft="2dp"
+        android:id="@+id/name" />
+
+    <RatingBar
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/rating"
+        style="?android:attr/ratingBarStyleSmall"
+        android:layout_below="@id/name"
+        android:layout_toRightOf="@id/image_profile"
+        android:numStars="5"
+        android:stepSize=".5"
+        android:isIndicator="true"
+        android:paddingBottom="3dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/comment"
+        android:textSize="15sp"
+        android:layout_below="@id/rating"
+        android:layout_toRightOf="@id/image_profile"
+        android:paddingLeft="4dp"
+        android:textColor="@color/secondary_text"
+        android:text="Blah blah blah Blah blah blah."/>
+
+
+</RelativeLayout>
