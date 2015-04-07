@@ -16,18 +16,22 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dvhs.spark.extras.AttractionParser;
 import com.dvhs.spark.R;
+import com.dvhs.spark.extras.CircleTransform;
 import com.dvhs.spark.fragments.BrowseFragment;
 import com.dvhs.spark.fragments.DetailsFragment;
 import com.dvhs.spark.models.Attraction;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +42,7 @@ public class MainActivity extends ActionBarActivity {
     FragmentManager fragmentManager = getFragmentManager();
     BrowseFragment browseFragment = new BrowseFragment();
     DetailsFragment detailsFragment = new DetailsFragment();
+
     ActionBarDrawerToggle drawerToggle;
     Toolbar toolbar;
     ListView listViewNavigation;
@@ -104,6 +109,12 @@ public class MainActivity extends ActionBarActivity {
                 drawer.closeDrawers();
             }
         });
+
+        ImageView navProfileImage = (ImageView) findViewById(R.id.nav_image_profile);
+
+        String facebookId = ParseUser.getCurrentUser().getString("facebookId");
+        Picasso.with(getApplicationContext()).load("https://graph.facebook.com/" + facebookId + "/picture?type=large")
+                .transform(new CircleTransform()).into(navProfileImage);
     }
 
     @Override

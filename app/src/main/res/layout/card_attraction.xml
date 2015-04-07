@@ -40,12 +40,24 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="4dp" />
 
+        <RatingBar
+            android:id="@+id/rating_bar"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text_attraction_address"
+            android:isIndicator="true"
+            android:layout_marginLeft="9dp"
+            android:layout_marginTop="5dp"
+            android:numStars="5"
+            android:stepSize=".5" />
+
 
         <Button
             android:id="@+id/button_learn_more"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/text_attraction_address"
+            android:layout_below="@id/rating_bar"
             android:background="@android:color/transparent"
             android:paddingLeft="10dp"
             android:text="Learn More"
