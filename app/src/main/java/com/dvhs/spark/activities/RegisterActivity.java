@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.dvhs.spark.R;
 import com.facebook.Request;
@@ -24,6 +25,7 @@ public class RegisterActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ParseUser.logOut();
 
         if(ParseUser.getCurrentUser() != null) {
             openMainActivity();
@@ -42,10 +44,14 @@ public class RegisterActivity extends Activity {
     }
 
     public void startFacebookAuth() {
+        Toast.makeText(getApplicationContext(), "Clicked", Toast.LENGTH_SHORT).show();
         ParseFacebookUtils.logIn(this, new LogInCallback() {
             @Override
             public void done(ParseUser user, ParseException err) {
-                if (user == null) {
+                if(err != null) {
+                    Log.d("MyApp", err.getMessage());
+                }
+                else if (user == null) {
                     Log.d("MyApp", "User denied Facebook authentication.");
                 } else if (user.isNew()) {
                     retrieveFacebookUserInfo();
