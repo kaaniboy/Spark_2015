@@ -48,7 +48,7 @@
             android:layout_below="@id/text_attraction_address"
             android:isIndicator="true"
             android:layout_marginLeft="9dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="8dp"
             android:numStars="5"
             android:stepSize=".5" />
 

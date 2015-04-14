@@ -10,15 +10,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-    <com.melnykov.fab.FloatingActionButton
-        android:id="@+id/fab"
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        android:layout_margin="16dp"
-        android:src="@mipmap/ic_action_new"
-        fab:fab_colorNormal="@color/fab"
-        fab:fab_colorPressed="@color/fab"
-        fab:fab_colorRipple="@color/primary_dark"/>
+        android:text="Unable to connect to the Internet."
+        android:id="@+id/text_no_connection"
+        android:visibility="gone"
+        android:layout_gravity="center" />
 
 </FrameLayout>

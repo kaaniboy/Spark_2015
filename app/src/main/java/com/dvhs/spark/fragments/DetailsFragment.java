@@ -40,6 +40,7 @@ public class DetailsFragment extends Fragment {
     MainActivity mainActivity;
     ListView listViewComments;
     RatingBar ratingBar;
+    TextView textNoComments;
     ReviewDialogFragment reviewDialog = new ReviewDialogFragment();
 
     @Override
@@ -52,6 +53,7 @@ public class DetailsFragment extends Fragment {
 
         TextView textPhone = (TextView) view.findViewById(R.id.text_phone);
         TextView textWebsite = (TextView) view.findViewById(R.id.text_url);
+        textNoComments = (TextView) view.findViewById(R.id.text_no_comments);
 
         textPhone.setText(attraction.getPhone() + "");
         textWebsite.setText(attraction.getWebsite() + "");
@@ -105,15 +107,20 @@ public class DetailsFragment extends Fragment {
                 CommentsAdapter adapter = new CommentsAdapter(getActivity().getApplicationContext(), comments);
                 listViewComments.setAdapter(adapter);
 
-                int totalRating = 0;
-                int numRatings = 0;
 
-                for(Comment c: comments) {
-                    totalRating += c.getRating();
-                    numRatings++;
+                if(attraction.getRatingCount() != 0) {
+                    ratingBar.setRating((attraction.getRatingTotal() * 1.0f) / attraction.getRatingCount());
+                } else {
+                    ratingBar.setRating(0);
                 }
 
-                ratingBar.setRating((totalRating * 1.0f) / numRatings);
+                if(comments != null && comments.size() > 0) {
+                    listViewComments.setVisibility(View.VISIBLE);
+                    textNoComments.setVisibility(View.GONE);
+                } else {
+                    listViewComments.setVisibility(View.GONE);
+                    textNoComments.setVisibility(View.VISIBLE);
+                }
             }
         });
     }

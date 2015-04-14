@@ -18,6 +18,7 @@ import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 
 public class RegisterActivity extends Activity {
@@ -25,6 +26,7 @@ public class RegisterActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         ParseUser.logOut();
 
         if(ParseUser.getCurrentUser() != null) {
@@ -44,7 +46,6 @@ public class RegisterActivity extends Activity {
     }
 
     public void startFacebookAuth() {
-        Toast.makeText(getApplicationContext(), "Clicked", Toast.LENGTH_SHORT).show();
         ParseFacebookUtils.logIn(this, new LogInCallback() {
             @Override
             public void done(ParseUser user, ParseException err) {
@@ -56,7 +57,6 @@ public class RegisterActivity extends Activity {
                 } else if (user.isNew()) {
                     retrieveFacebookUserInfo();
                     Log.d("MyApp", "Signed up and logged in.");
-                    openMainActivity();
                 } else {
                     Log.d("MyApp", "Logged in.");
                     openMainActivity();
@@ -71,7 +71,12 @@ public class RegisterActivity extends Activity {
             public void onCompleted(GraphUser user, Response response) {
                 ParseUser.getCurrentUser().put("name", user.getName());
                 ParseUser.getCurrentUser().put("facebookId", user.getId());
-                ParseUser.getCurrentUser().saveInBackground();
+                ParseUser.getCurrentUser().saveInBackground(new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        openMainActivity();
+                    }
+                });
             }
         }).executeAsync();
     }

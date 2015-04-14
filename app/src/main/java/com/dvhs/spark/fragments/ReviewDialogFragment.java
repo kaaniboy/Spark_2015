@@ -69,6 +69,9 @@ public class ReviewDialogFragment extends DialogFragment {
                 detailsFragment.refreshComments();
             }
         });
+
+        attraction.addToRatingTotal(rating);
+        attraction.saveInBackground();
     }
 
     public void setAttraction(Attraction attraction) {

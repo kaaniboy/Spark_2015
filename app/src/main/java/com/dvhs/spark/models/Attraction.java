@@ -76,5 +76,17 @@ public class Attraction extends ParseObject {
         put("type", type);
     }
 
+    public int getRatingCount() {
+        return getInt("ratingCount");
+    }
+
+    public void addToRatingTotal(int rating) {
+        increment("ratingTotal", rating);
+        increment("ratingCount");
+    }
+
+    public int getRatingTotal() {
+        return getInt("ratingTotal");
+    }
 
 }

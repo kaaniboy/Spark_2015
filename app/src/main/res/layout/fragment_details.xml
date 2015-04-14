@@ -59,7 +59,7 @@
         android:layout_marginLeft="4dp"
         android:autoLink="phone"
         android:drawableLeft="@mipmap/ic_action_call"
-        android:drawablePadding="3dp"
+        android:drawablePadding="6dp"
         android:padding="4dp"
         android:text="999-999-9999"
         android:textColor="@color/primary_dark"
@@ -73,7 +73,7 @@
         android:layout_marginLeft="4dp"
         android:autoLink="web"
         android:drawableLeft="@mipmap/ic_action_web_site"
-        android:drawablePadding="3dp"
+        android:drawablePadding="6dp"
         android:padding="4dp"
         android:text="www.google.com"
         android:textColorLink="@color/primary_dark"
@@ -92,6 +92,15 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:divider="@null"
+        android:visibility="visible"
         android:dividerHeight="0dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_no_comments"
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone"
+        android:text="No comments have been posted yet."/>
 
 </LinearLayout>

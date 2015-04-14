@@ -40,8 +40,8 @@ public class Comment extends ParseObject {
         try {
             return "https://graph.facebook.com/" + getUser().fetchIfNeeded().getString("facebookId") + "/picture?type=normal";
         } catch(com.parse.ParseException e) {
-            Log.e("Error", "GET WRECKED BOIZ");
-            return "";
+            Log.e("MyApp", "Error retrieving Facebook profile URL.");
+            return null;
         }
     }
 

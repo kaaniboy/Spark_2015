@@ -10,6 +10,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.transition.Explode;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,6 +28,8 @@ import com.dvhs.spark.extras.CircleTransform;
 import com.dvhs.spark.fragments.BrowseFragment;
 import com.dvhs.spark.fragments.DetailsFragment;
 import com.dvhs.spark.models.Attraction;
+import com.google.android.gms.location.places.ui.PlacePicker;
+import com.melnykov.fab.FloatingActionButton;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -62,6 +65,8 @@ public class MainActivity extends ActionBarActivity {
         detailsFragment.setMainActivity(this);
 
         listViewNavigation = (ListView) findViewById(R.id.list_view_attraction_types);
+
+
 
         FragmentTransaction ft = fragmentManager.beginTransaction();
         ft.add(R.id.fragment, browseFragment);
@@ -111,10 +116,18 @@ public class MainActivity extends ActionBarActivity {
         });
 
         ImageView navProfileImage = (ImageView) findViewById(R.id.nav_image_profile);
+        TextView navName = (TextView) findViewById(R.id.nav_name);
 
-        String facebookId = ParseUser.getCurrentUser().getString("facebookId");
-        Picasso.with(getApplicationContext()).load("https://graph.facebook.com/" + facebookId + "/picture?type=large")
-                .transform(new CircleTransform()).into(navProfileImage);
+        try {
+            String facebookId = ParseUser.getCurrentUser().fetchIfNeeded().getString("facebookId");
+            Picasso.with(getApplicationContext()).load("https://graph.facebook.com/" + facebookId + "/picture?type=large")
+                    .transform(new CircleTransform()).into(navProfileImage);
+
+            navName.setText(ParseUser.getCurrentUser().fetchIfNeeded().getString("name"));
+
+        } catch(Exception e) {
+            Log.e("MyApp", e.getMessage());
+        }
     }
 
     @Override

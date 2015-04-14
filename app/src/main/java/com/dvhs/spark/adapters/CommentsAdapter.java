@@ -41,17 +41,19 @@ public class CommentsAdapter extends ArrayAdapter<Comment> {
         RatingBar ratingBar = (RatingBar) rowView.findViewById(R.id.rating);
         ImageView imageProfile = (ImageView) rowView.findViewById(R.id.image_profile);
 
-        Picasso.with(context).load(comments.get(position).getUserProfileImageURL())
-                .transform(new CircleTransform()).into(imageProfile);
+        if (comments.get(position).getUserProfileImageURL() != null) {
+            Picasso.with(context).load(comments.get(position).getUserProfileImageURL())
+                    .transform(new CircleTransform()).into(imageProfile);
+        }
 
-        Log.e("Error", comments.get(position).getUserProfileImageURL());
         textComment.setText(comments.get(position).getText());
 
         try {
             textName.setText(comments.get(position).getUser().fetchIfNeeded().getString("name") + ": ");
-        } catch(com.parse.ParseException e) {
+        } catch (com.parse.ParseException e) {
 
         }
+
         ratingBar.setRating(comments.get(position).getRating());
         return rowView;
     }
